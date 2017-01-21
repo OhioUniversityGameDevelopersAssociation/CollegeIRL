@@ -33,5 +33,10 @@ public class EnemyScript : MonoBehaviour
 			player.SendMessage ("Damage");
 			Destroy (gameObject);
 		}
+
+		if (transform.position == startPos) 
+		{
+			Destroy (gameObject);
+		}
 	}
 }
