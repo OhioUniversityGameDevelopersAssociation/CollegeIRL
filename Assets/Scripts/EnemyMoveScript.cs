@@ -8,23 +8,17 @@ public class EnemyMoveScript : MonoBehaviour
 	public int health;
 	public bool buttonHeld;
 	public float speed;
-	float startTime;
-	float journeyLength;
-	float disCovered;
-	float fractJourney;
+	float fractJourney = 0.01f;
 
 	void Start ()
 	{
-		startTime = Time.time;
 		startPos = transform.position;
-		journeyLength = Vector3.Distance (startPos, player.transform.position);
 	}
 	void Update () 
 	{
 		if(health > 0 && buttonHeld == false)
 		{
-			disCovered = (Time.time - startTime) * speed;
-			fractJourney = disCovered / journeyLength;
+			fractJourney += speed * Time.deltaTime;
 			transform.position = Vector3.Lerp(startPos, player.transform.position, fractJourney);
 		}
 
