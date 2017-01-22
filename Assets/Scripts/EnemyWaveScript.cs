@@ -58,10 +58,10 @@ public class EnemyWaveScript : MonoBehaviour
     {
         this.waveNumber = waveNumber;
 
-        enemiesLeft = (int)Mathf.Sqrt(40 * (waveNumber - 1)) + Random.Range(2, 8) + 15; //y = sqrt{40x} + 15 + (random)
-        float speed = (Mathf.Sqrt(50 * (waveNumber - 1)) + 5) / 100;
-        enemyPrefab.GetComponent<EnemyScript>().startSpeed = (Mathf.Sqrt(50 * (waveNumber - 1)) + 5)/100; //calc speed  y = sqrt{50x}+5
-        print(speed);
+        enemiesLeft = (int)Mathf.Sqrt(20 * (waveNumber - 1)) + Random.Range(0, 3) + 3; //y = sqrt{20x} + 3 + (random)
+        enemyPrefab.GetComponent<EnemyScript>().startSpeed = (Mathf.Sqrt(50 * (waveNumber - 1)) + 25) / 100; //calc speed  y = sqrt{50x}+5
+
+        //TODO add in wave notification
     }
 
     EnemyScript spawnEnemy()
