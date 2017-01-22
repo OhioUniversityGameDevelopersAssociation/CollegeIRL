@@ -6,6 +6,7 @@ public class PlayerScript : MonoBehaviour
 	public int health; //The player's current health.
 	public GameObject enemySpawner;
 	public GameObject audioManager;
+	public GameObject loseCanvas;
 	AudioSource[] audio;
 	Animator animator;
 	int state = 4;
@@ -23,6 +24,7 @@ public class PlayerScript : MonoBehaviour
 		if (health <= 0) 
 		{
 			enemySpawner.GetComponent<EnemyWaveScript> ().gameOver = true;
+			loseCanvas.SetActive (true);
 		} else if(health <= 2 && state == 2)
 		{
 			animator.SetTrigger ("NextState");
