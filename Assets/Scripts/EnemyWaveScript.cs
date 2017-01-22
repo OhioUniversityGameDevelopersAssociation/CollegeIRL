@@ -14,6 +14,7 @@ public class EnemyWaveScript : MonoBehaviour
 	public Sprite[] anxiousSprites;
 	public Sprite[] characterSprites;
     public char[] buttons;
+	public bool gameOver = false;
 	GameObject lastEnemy;
 	float lastSpawnTime;
 	float waitTime; //Actual wait time between spawning enemies between min and max above.
@@ -32,7 +33,7 @@ public class EnemyWaveScript : MonoBehaviour
 
 	void Update()
 	{
-		if (Time.time > lastSpawnTime + waitTime) 
+		if (Time.time > lastSpawnTime + waitTime && !gameOver) 
 		{
 			if (enemiesLeft >= 1) //there are still enemies to spawn this wave, spawn an enemy
 			{

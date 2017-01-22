@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerScript : MonoBehaviour 
 {
 	public int health; //The player's current health.
+	public GameObject enemySpawner;
 	public GameObject audioManager;
 	AudioSource[] audio;
 	Animator animator;
@@ -21,7 +22,7 @@ public class PlayerScript : MonoBehaviour
 	{
 		if (health <= 0) 
 		{
-			print ("You're dead.");
+			enemySpawner.GetComponent<EnemyWaveScript> ().gameOver = true;
 		} else if(health <= 2 && state == 2)
 		{
 			animator.SetTrigger ("NextState");
