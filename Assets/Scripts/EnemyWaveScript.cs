@@ -51,7 +51,26 @@ public class EnemyWaveScript : MonoBehaviour
 
     EnemyScript spawnEnemy()
     {
-		spawnPoint = new Vector3 (10,0,0);
+		if (Random.Range (0, 2) == 1)
+		{
+			if (Random.Range (0, 2) == 1)
+			{
+				spawnPoint = new Vector3 (9.5f, 1, Random.Range(-6f,6f));
+			} else 
+			{
+				spawnPoint = new Vector3 (-9.5f, 1, Random.Range(-6f,6f));
+			}
+		} else 
+		{
+			if (Random.Range(0, 2) == 1)
+			{
+				spawnPoint = new Vector3 (Random.Range(-9.5f,9.5f), 1, 6f);
+			}else
+			{
+				spawnPoint = new Vector3 (Random.Range(-9.5f,9.5f), 1, -6f);
+			}
+		}
+
 
 
 		buttonIndex = Random.Range (0, buttons.Length);
