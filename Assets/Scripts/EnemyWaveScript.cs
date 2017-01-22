@@ -55,15 +55,26 @@ public class EnemyWaveScript : MonoBehaviour
 
 
 		buttonIndex = Random.Range (0, buttons.Length);
-		button = buttons [buttonIndex];
-		for(int i = 0; i < characterSprites.Length; i++)
-		{
-			
-		}
+		button = buttons[buttonIndex];
 
 
 		lastEnemy = (GameObject)Instantiate (enemyPrefab, spawnPoint, Quaternion.Euler(new Vector3(90,0,0)));
 		lastEnemy.GetComponent<EnemyScript> ().player = player;
+
+
+		lastEnemy.GetComponent<SpriteRenderer>().sprite = anxiousSprites[Random.Range(0,anxiousSprites.Length)];
+
+
+		for(int i = 0; i < characterSprites.Length; i++)
+		{
+			if (""+button == characterSprites[i].name)
+			{
+				lastEnemy.GetComponent<EnemyScript> ().button = button;
+				lastEnemy.transform.GetChild (0).GetComponent<SpriteRenderer> ().sprite = characterSprites[i];
+			}
+		}
+
+
 		enemiesLeft--;
 		return lastEnemy.GetComponent<EnemyScript> ();
 		//TODO spawn enemy
