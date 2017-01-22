@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
 		if (health <= 0) 
 		{
 			enemySpawner.GetComponent<EnemyWaveScript> ().gameOver = true;
+			PlayerPrefs.SetInt ("Score10", score);
 			loseCanvas.SetActive (true);
 		} else if(health <= 2 && state == 2)
 		{
@@ -67,9 +68,5 @@ public class PlayerScript : MonoBehaviour
 	void Damage() //Running this function subtracts one health from the player and prints a debug if health is <= 0.
 	{
 		health -= 1;
-		if (health <= 0)
-		{
-			print ("You dead.");
-		}
 	}
 }

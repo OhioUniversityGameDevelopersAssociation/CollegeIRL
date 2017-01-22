@@ -1,19 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoseGameScript : MonoBehaviour 
+public class ScoreScript : MonoBehaviour 
 {
-	public GameObject scoreText;
-	public GameObject player;
+	public GameObject[] scoreTexts; //The UI elements that display the score text.
 	int[] scores = {0,0,0,0,0,0,0,0,0,0,0};
 	int isInOrder = 1;
 
 	void Start()
 	{
-		scoreText.GetComponent<Text>().text = "Score: " + player.GetComponent<PlayerScript> ().score;
-
 		addScores ();
 	}
 
@@ -22,7 +18,11 @@ public class LoseGameScript : MonoBehaviour
 	{
 		organizeScores ();
 
-		storeScores ();
+
+		for (int i = 0; i < 10; i++) 
+		{
+			scoreTexts [i].GetComponent<Text> ().text = ""+scores[i];
+		}
 	}
 
 
@@ -60,29 +60,5 @@ public class LoseGameScript : MonoBehaviour
 				}
 			}
 		}
-	}
-
-
-	void storeScores() //Saves the scores in the array scores to the playerPrefs.
-	{
-		for (int i = 0; i < 10; i++)
-		{
-			PlayerPrefs.SetInt ("Score" + i, scores [i]);
-		}
-	}
-
-
-
-	void QuitGame()
-	{
-		Application.Quit ();
-	}
-	void BackToMenu()
-	{
-		SceneManager.LoadScene ("Menu");
-	}
-	void RestartLevel()
-	{
-		SceneManager.LoadScene ("Level01");
 	}
 }
