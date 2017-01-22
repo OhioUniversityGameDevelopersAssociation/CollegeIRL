@@ -11,6 +11,11 @@ public class ScoreScript : MonoBehaviour
 	void Start()
 	{
 		addScores ();
+
+		for(int i = 0; i < 10; i++)
+		{
+			scoreTexts [i].GetComponent<Text> ().fontSize = ((Screen.height / 1080) * 35);
+		}
 	}
 
 

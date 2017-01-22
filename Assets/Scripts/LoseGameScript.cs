@@ -15,6 +15,8 @@ public class LoseGameScript : MonoBehaviour
 		scoreText.GetComponent<Text>().text = "Score: " + player.GetComponent<PlayerScript> ().score;
 
 		addScores ();
+
+		scoreText.GetComponent<Text> ().fontSize = ((Screen.height / 1080) * 35);
 	}
 
 
