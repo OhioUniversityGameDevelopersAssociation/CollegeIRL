@@ -14,6 +14,8 @@ public class EnemyWaveScript : MonoBehaviour
 	public Sprite[] characterSprites;
 	public char[] buttons;
 	GameObject lastEnemy;
+	float lastSpawnTime;
+	float waitTime; //Actual wait time between spawning enemies between min and max above.
 	Vector3 spawnPoint;
 	char button;
 	int buttonIndex;
@@ -23,17 +25,26 @@ public class EnemyWaveScript : MonoBehaviour
       int speed;
       string button;
     }
+		
 
+	void Start()
+	{
+		waitTime = Random.Range (spawnMin, spawnMax);
+	}
 
 
 	void Update()
 	{
-		if (enemiesLeft >= 1) 
+		if (Time.time > lastSpawnTime + waitTime) 
 		{
-			spawnEnemy ();
+			if (enemiesLeft >= 1) 
+			{
+				spawnEnemy ();
+				lastSpawnTime = Time.time;
+				waitTime = Random.Range (spawnMin, spawnMax);
+			}
 		}
 	}
-
 
 
 /*    EnemyWaveScript(int waveNumber)
