@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyScript : MonoBehaviour 
 {
 	public GameObject player;
+	public GameObject spawner;
 	public Vector3 startPos;
 	public float startSpeed;
 	public char button; //Assigned button you must press to move the enemy away, assigned by the spawning script.
@@ -39,6 +41,7 @@ public class EnemyScript : MonoBehaviour
 		if (Vector2.Distance (new Vector2 (transform.position.x, transform.position.z), new Vector2 (player.transform.position.x, player.transform.position.z)) <= 1) //If the enemy is close enough to the player, run the damage function on the player.
 		{
 			player.SendMessage ("Damage");
+			addButton (button);
 			Destroy (gameObject);
 		}
 
@@ -47,7 +50,14 @@ public class EnemyScript : MonoBehaviour
 		{
             //destroy enemy, add score
             player.GetComponent<PlayerScript>().score++;
+			addButton (button);
 			Destroy (gameObject);
 		}
+	}
+
+	void addButton (char buttonName) //Adds a button back into the list of availible buttons. Use when an enemy is destroyed.
+	{
+		spawner.GetComponent<EnemyWaveScript> ().buttons.Add (button);
+		spawner.GetComponent<EnemyWaveScript> ().buttonsSize++;
 	}
 }
