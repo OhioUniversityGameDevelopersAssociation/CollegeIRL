@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
 	public GameObject enemySpawner;
 	public GameObject audioManager;
 	public GameObject loseCanvas;
+    public int score;
 	AudioSource[] audio;
 	Animator animator;
 	int state = 4;

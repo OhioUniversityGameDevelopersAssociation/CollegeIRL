@@ -45,6 +45,8 @@ public class EnemyScript : MonoBehaviour
 
 		if (transform.position == startPos) 
 		{
+            //destroy enemy, add score
+            player.GetComponent<PlayerScript>().score++;
 			Destroy (gameObject);
 		}
 	}
