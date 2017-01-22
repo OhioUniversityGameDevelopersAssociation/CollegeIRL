@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour 
 {
+	public GameObject creditsImage;
+	public GameObject highScoreImage;
+
 	void StartGame()
 	{
 		SceneManager.LoadScene ("Level01");
@@ -14,10 +17,10 @@ public class MenuScript : MonoBehaviour
 	}
 	void Credits()
 	{
-		print ("Credits.");
+		creditsImage.SetActive (true);
 	}
 	void HighScore()
 	{
-		print ("High Score");
+		highScoreImage.SetActive (true);
 	}
 }
