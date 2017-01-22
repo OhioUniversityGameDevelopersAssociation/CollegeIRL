@@ -6,30 +6,27 @@ public class EnemyWaveScript : MonoBehaviour
 
     public int waveNumber; //the wave number
     public int enemiesLeft; //number of enemies currently left in the wave
+    public float roundDelay; //delay between rounds
     public float spawnMin; //min time to wait until spawning next enemy
     public float spawnMax; //max time to wait until spawning the next enemy
 	public GameObject enemyPrefab;
 	public GameObject player;
 	public Sprite[] anxiousSprites;
 	public Sprite[] characterSprites;
-	public char[] buttons;
+    public char[] buttons;
 	GameObject lastEnemy;
 	float lastSpawnTime;
 	float waitTime; //Actual wait time between spawning enemies between min and max above.
+    float roundDelayLeft;
 	Vector3 spawnPoint;
 	char button;
 	int buttonIndex;
-
-    struct EnemyData 
-	{
-      int speed;
-      string button;
-    }
 		
 
 	void Start()
 	{
 		waitTime = Random.Range (spawnMin, spawnMax);
+        setWave(1);
 	}
 
 
@@ -37,28 +34,35 @@ public class EnemyWaveScript : MonoBehaviour
 	{
 		if (Time.time > lastSpawnTime + waitTime) 
 		{
-			if (enemiesLeft >= 1) 
+			if (enemiesLeft >= 1) //there are still enemies to spawn this wave, spawn an enemy
 			{
 				spawnEnemy ();
 				lastSpawnTime = Time.time;
 				waitTime = Random.Range (spawnMin, spawnMax);
 			}
+            else //if there are no enemies left to spawn, we need to progress to the next wave
+            {
+                //increase delay
+                roundDelayLeft += Time.deltaTime;
+                if(roundDelayLeft >= roundDelay)
+                {
+                    //reset time and change wave
+                    roundDelayLeft = 0;
+                    setWave(++waveNumber);
+                }
+            }
 		}
 	}
 
-
-/*    EnemyWaveScript(int waveNumber)
+    void setWave(int waveNumber)
     {
-        //assign variables
         this.waveNumber = waveNumber;
 
-        //calculate data based on wave
-        enemiesLeft = (int)Mathf.Sqrt(40 * waveNumber) + Random.Range(2, 8) + 15; //y = sqrt{40x} + 15 + (random)
-        //TODO calculate other variables and define a default enemy
-        //calc speed  y = sqrt{50x}+5
+        enemiesLeft = (int)Mathf.Sqrt(40 * (waveNumber - 1)) + Random.Range(2, 8) + 15; //y = sqrt{40x} + 15 + (random)
+        float speed = (Mathf.Sqrt(50 * (waveNumber - 1)) + 5) / 100;
+        enemyPrefab.GetComponent<EnemyScript>().startSpeed = (Mathf.Sqrt(50 * (waveNumber - 1)) + 5)/100; //calc speed  y = sqrt{50x}+5
+        print(speed);
     }
-*/
-
 
     EnemyScript spawnEnemy()
     {

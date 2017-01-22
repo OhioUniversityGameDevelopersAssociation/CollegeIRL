@@ -7,8 +7,8 @@ public class EnemyScript : MonoBehaviour
 	public Vector3 startPos;
 	public float startSpeed;
 	public char button; //Assigned button you must press to move the enemy away, assigned by the spawning script.
-	float fractJourney = 0.01f; //Starts the player 1% of the way toward the player so that it isn't destroyed on spawn.
-	float speed; //Speed of the player in percent of distanced traveled per second. e.g. 0.50 is the enemy will move 50% of the way to the player each second.
+    float speed; //Speed of the player in percent of distanced traveled per second. e.g. 0.50 is the enemy will move 50% of the way to the player each second.
+    float fractJourney = 0.01f; //Starts the player 1% of the way toward the player so that it isn't destroyed on spawn.
 
 
 
